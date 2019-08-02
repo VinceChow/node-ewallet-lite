@@ -1,2 +1,5 @@
 node_modules
 draft
+
+# dotenv environment variables file
+.env
