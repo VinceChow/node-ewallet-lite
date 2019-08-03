@@ -87,6 +87,12 @@ userSchema.statics.findByCredentials = async (contactNumber, pin) => {
 // Has the plain text pin before saving
 userSchema.pre('save', async function(next) {
     const user = this;
+
+    // // Testing Only
+    // console.log(user.isNew);
+    // console.log('name isModified', user.isModified('name'));
+    // console.log('modifiedPaths', user.modifiedPaths());
+
     if (user.isModified('pin')) {
         user.pin = await bcrypt.hash(user.pin, 8);
     }
