@@ -24,13 +24,10 @@ const userSchema = new mongoose.Schema(
         },
         pin: {
             type: String,
-            required: true,
-            minlength: 6,
-            maxlength: 6
+            required: true
         },
         token: {
-            type: String,
-            required: true
+            type: String
         },
         balance: {
             type: Number,
@@ -49,13 +46,16 @@ userSchema.methods.toJSON = function() {
 
     delete userObject.pin;
     delete userObject.token;
-    
+
     return userObject;
 };
 
 userSchema.methods.generateAuthToken = async function() {
     const user = this;
-    const token = jwt.sign({ _id: user._id.toString() }, process.env.JWT_SECRET);
+    const token = jwt.sign(
+        { _id: user._id.toString(), pin: user.pin },
+        process.env.JWT_SECRET
+    );
 
     user.token = token;
     await user.save();
