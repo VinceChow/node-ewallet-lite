@@ -6,7 +6,6 @@ const router = new express.Router();
 
 router.post('/register', async (req, res) => {
     const user = new User(req.body);
-
     try {
         await user.save();
         const token = await user.generateAuthToken();
@@ -37,6 +36,10 @@ router.post('/logout', auth, async (req, res) => {
     } catch (e) {
         res.status(500).send();
     }
+});
+
+router.get('/profile', auth, async (req, res) => {
+    res.send(req.user);
 });
 
 module.exports = router;
