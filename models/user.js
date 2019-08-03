@@ -72,6 +72,18 @@ userSchema.methods.generateAuthToken = async function() {
     return token;
 };
 
+userSchema.statics.findByCredentials = async (contactNumber, pin) => {
+    const user = await User.findOne({ contactNumber });
+    if (!user) {
+        throw new Error('Unable to login!');
+    }
+    const isMatch = await bcrypt.compare(pin, user.pin);
+    if (!isMatch) {
+        throw new Error('Unable to login!');
+    }
+    return user;
+};
+
 // Has the plain text pin before saving
 userSchema.pre('save', async function(next) {
     const user = this;
