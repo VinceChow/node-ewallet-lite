@@ -22,6 +22,15 @@ const userSchema = new mongoose.Schema(
                 }
             }
         },
+        countryCode: {
+            type: String,
+            required: true,
+            default: '+60'
+        },
+        contactNumber: {
+            type: Number,
+            required: true
+        },
         pin: {
             type: String,
             required: true
