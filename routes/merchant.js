@@ -61,4 +61,34 @@ router.patch('/update', async (req, res) => {
     }
 });
 
+router.delete('/delete', async (req, res) => {
+    const merchant = await Merchant.findOne({ mid: req.body.mid });
+    if (!merchant) {
+        return res.status(404).send('Merchant does not exist!');
+    }
+
+    try {
+        merchant.status = MERCHANT_STATUS.DELETE;
+        await merchant.save();
+        res.send('Merchant has been deleted.');
+    } catch (err) {
+        res.status(400).send(err);
+    }
+});
+
+router.post('/activate', async (req, res) => {
+    const merchant = await Merchant.findOne({ mid: req.body.mid });
+    if (!merchant) {
+        return res.status(404).send('Merchant does not exist!');
+    }
+
+    try {
+        merchant.status = MERCHANT_STATUS.ACTIVE;
+        await merchant.save();
+        res.send('Merchant has been activated.');
+    } catch (err) {
+        res.status(400).send(err);
+    }
+});
+
 module.exports = router;
