@@ -66,11 +66,6 @@ const merchantSchema = new mongoose.Schema(
     { timestamps: true }
 );
 
-merchantSchema.statics.findByMid = async mid => {
-    const merchant = await Merchant.findOne({ mid });
-    return merchant;
-};
-
 const Merchant = mongoose.model('Merchant', merchantSchema);
 
 module.exports = Merchant;

@@ -1,6 +1,6 @@
 const express = require('express');
 const Merchant = require('../models/merchant');
-const { MERCHANT_STATUS, SETTLEMENT } = require('../utils/constants/merchant');
+const { MERCHANT_STATUS } = require('../utils/constants/merchant');
 
 const router = new express.Router();
 
