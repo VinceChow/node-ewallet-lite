@@ -21,11 +21,43 @@ router.post('/register', async (req, res) => {
 });
 
 router.get('/:mid', async (req, res) => {
+    const merchant = await Merchant.findOne({ mid: req.params.mid });
+    if (!merchant) {
+        res.status(404).send('Merchant does not exist!');
+    } else {
+        res.send(merchant);
+    }
+});
+
+router.patch('/update', async (req, res) => {
+    const merchant = await Merchant.findOne({ mid: req.body.mid });
+    if (!merchant) {
+        return res.status(404).send('Merchant does not exist!');
+    }
+    delete req.body.mid;
+
+    const validUpdates = [
+        'name',
+        'branch',
+        'countryCode',
+        'contactNumber',
+        'settlementPeriod'
+    ];
+    const updates = Object.keys(req.body);
+    const isValidOperation = updates.every(update =>
+        validUpdates.includes(update)
+    );
+
+    if (!isValidOperation) {
+        return res.status(400).send('Invalid updates!');
+    }
+
     try {
-        const merchant = await Merchant.findByMid(req.params.mid);
+        updates.forEach(update => (merchant[update] = req.body[update]));
+        await merchant.save();
         res.send(merchant);
     } catch (err) {
-        res.status(401).send(err.message);
+        res.status(400).send(err);
     }
 });
 
