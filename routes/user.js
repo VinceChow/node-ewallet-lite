@@ -1,7 +1,6 @@
 const express = require('express');
 const User = require('../models/user');
 const auth = require('../middleware/auth');
-const { updateProfile } = require('../middleware/verifyUpdate');
 
 const router = new express.Router();
 
@@ -43,8 +42,25 @@ router.get('/profile', auth, async (req, res) => {
     res.send(req.user);
 });
 
-router.patch('/profile', auth, updateProfile, async (req, res) => {
+router.patch('/profile', auth, async (req, res) => {
+    const validUpdates = [
+        'name',
+        'email',
+        'pin',
+        'countryCode',
+        'contactNumber'
+    ];
+    const updates = Object.keys(req.body);
+    const isValidOperation = updates.every(update =>
+        validUpdates.includes(update)
+    );
+
+    if (!isValidOperation) {
+        return res.status(400).send('Invalid updates!');
+    }
+
     try {
+        updates.forEach(update => (req.user[update] = req.body[update]));
         await req.user.save();
         res.send(req.user);
     } catch (error) {
