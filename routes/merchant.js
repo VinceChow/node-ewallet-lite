@@ -20,4 +20,13 @@ router.post('/register', async (req, res) => {
     }
 });
 
+router.get('/:mid', async (req, res) => {
+    try {
+        const merchant = await Merchant.findByMid(req.params.mid);
+        res.send(merchant);
+    } catch (err) {
+        res.status(401).send(err.message);
+    }
+});
+
 module.exports = router;
