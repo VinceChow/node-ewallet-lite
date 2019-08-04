@@ -1,6 +1,7 @@
 const express = require('express');
 const User = require('../models/user');
 const auth = require('../middleware/auth');
+const { ACCOUNT_STATUS } = require('../utils/constants/user');
 
 const router = new express.Router();
 
@@ -65,6 +66,26 @@ router.patch('/profile', auth, async (req, res) => {
         res.send(req.user);
     } catch (error) {
         res.status(400).send(error);
+    }
+});
+
+router.delete('/delete', auth, async (req, res) => {
+    try {
+        req.user.status = ACCOUNT_STATUS.DELETE;
+        await req.user.save();
+        res.send('User account has been deleted.');
+    } catch (err) {
+        res.status(400).send(err);
+    }
+});
+
+router.post('/activate', auth, async (req, res) => {
+    try {
+        req.user.status = ACCOUNT_STATUS.ACTIVE;
+        await req.user.save();
+        res.send('User account has been activated.');
+    } catch (err) {
+        res.status(400).send(err);
     }
 });
 

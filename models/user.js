@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const validator = require('validator');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
+const { ACCOUNT_STATUS } = require('../utils/constants/user');
 
 const userSchema = new mongoose.Schema(
     {
@@ -29,7 +30,8 @@ const userSchema = new mongoose.Schema(
         },
         contactNumber: {
             type: Number,
-            required: true
+            required: true,
+            unique: true
         },
         pin: {
             type: String,
@@ -41,6 +43,11 @@ const userSchema = new mongoose.Schema(
         balance: {
             type: Number,
             default: 0.0
+        },
+        status: {
+            type: String,
+            required: true,
+            default: ACCOUNT_STATUS.ACTIVE
         }
     },
     {
