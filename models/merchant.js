@@ -8,12 +8,14 @@ const merchantSchema = new mongoose.Schema(
             type: String,
             required: true,
             unique: true,
+            immutable: true,
             default: uniqueString()
         },
         name: {
             type: String,
             required: true,
-            trim: true
+            trim: true,
+            unique: true
         },
         branch: {
             type: String
@@ -27,20 +29,38 @@ const merchantSchema = new mongoose.Schema(
             type: Number,
             required: true
         },
-        accountBalance: {
+        internalAccountBalance: {
             type: Number,
             min: 0,
             default: 0
         },
+        bankName: {
+            type: String,
+            required: true
+        },
+        bankAccountNumber: {
+            type: Number,
+            required: true
+        },
         settlementPeriod: {
             type: String,
             required: true,
-            default: SETTLEMENT.T_PLUS_1
+            default: SETTLEMENT.T_PLUS_1,
+            validate(value) {
+                if (!Object.values(SETTLEMENT).includes(value)) {
+                    throw new Error('Invalid settlement period');
+                }
+            }
         },
         status: {
             type: String,
             required: true,
-            default: MERCHANT_STATUS.ACTIVE
+            default: MERCHANT_STATUS.ACTIVE,
+            validate(value) {
+                if (!Object.values(MERCHANT_STATUS).includes(value)) {
+                    throw new Error('Invalid merchant status');
+                }
+            }
         }
     },
     { timestamps: true }

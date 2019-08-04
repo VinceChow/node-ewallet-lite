@@ -48,7 +48,12 @@ const userSchema = new mongoose.Schema(
         status: {
             type: String,
             required: true,
-            default: ACCOUNT_STATUS.ACTIVE
+            default: ACCOUNT_STATUS.ACTIVE,
+            validate(value) {
+                if (!Object.values(ACCOUNT_STATUS).includes(value)) {
+                    throw new Error('Invalid status');
+                }
+            }
         }
     },
     {
