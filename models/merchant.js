@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const uniqueString = require('unique-string');
-const { MERCHANT_STATUS } = require('../utils/constants/merchant');
+const { MERCHANT_STATUS, SETTLEMENT } = require('../utils/constants/merchant');
 
 const merchantSchema = new mongoose.Schema(
     {
@@ -34,7 +34,8 @@ const merchantSchema = new mongoose.Schema(
         },
         settlementPeriod: {
             type: String,
-            required: true
+            required: true,
+            default: SETTLEMENT.T_PLUS_1
         },
         status: {
             type: String,

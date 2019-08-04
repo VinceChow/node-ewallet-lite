@@ -4,6 +4,14 @@ const MERCHANT_STATUS = Object.freeze({
     SUSPEND: 'suspend'
 });
 
+const SETTLEMENT = Object.freeze({
+    T_PLUS_1: 't+1',
+    T_PLUS_2: 't+2',
+    W_PLUS_1: 'w+1',
+    B_PLUS_1: '+1'
+});
+
 module.exports = {
-    MERCHANT_STATUS
+    MERCHANT_STATUS,
+    SETTLEMENT
 };
