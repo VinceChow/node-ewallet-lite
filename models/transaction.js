@@ -6,10 +6,8 @@ const transactionSchema = new mongoose.Schema(
     {
         transactionId: {
             type: String,
-            required: true,
             unique: true,
-            immutable: true,
-            default: uniqueString()
+            immutable: true
         },
         user: {
             type: mongoose.Schema.Types.ObjectId,
@@ -39,6 +37,14 @@ const transactionSchema = new mongoose.Schema(
     },
     { timestamps: true }
 );
+
+transactionSchema.pre('save', async function(next) {
+    const transaction = this;
+    if (transaction.isNew) {
+        transaction.transactionId = uniqueString();
+    }
+    next();
+});
 
 const Transaction = mongoose.model('Transaction', transactionSchema);
 

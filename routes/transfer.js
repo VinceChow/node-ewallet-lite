@@ -33,10 +33,7 @@ router.post('/', auth, checkAmount, checkBalance, async (req, res) => {
         await sender.save();
         await receiver.save();
 
-        const uniqueString = require('unique-string');
-
         const transferFrom = await new Transaction({
-            transactionId: uniqueString(),
             user: sender._id,
             amount,
             type: TRANSACTION_TYPE.TRANSFER,
@@ -48,7 +45,6 @@ router.post('/', auth, checkAmount, checkBalance, async (req, res) => {
         }).save({ session });
 
         const transferTo = await new Transaction({
-            transactionId: uniqueString(),
             user: receiver._id,
             amount,
             type: TRANSACTION_TYPE.TRANSFER,
