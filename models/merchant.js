@@ -29,6 +29,10 @@ const merchantSchema = new mongoose.Schema(
             type: Number,
             required: true
         },
+        address: {
+            type: String,
+            required: true
+        },
         internalAccountBalance: {
             type: Number,
             min: 0,
