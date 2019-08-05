@@ -3,6 +3,7 @@ const validator = require('validator');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const { ACCOUNT_STATUS } = require('../utils/constants/user');
+const { GLOBAL_MAX } = require('../utils/constants/balance');
 
 const userSchema = new mongoose.Schema(
     {
@@ -43,6 +44,7 @@ const userSchema = new mongoose.Schema(
         balance: {
             type: Number,
             min: 0,
+            max: GLOBAL_MAX,
             default: 0
         },
         status: {
