@@ -49,11 +49,7 @@ const userSchema = new mongoose.Schema(
             type: String,
             required: true,
             default: ACCOUNT_STATUS.ACTIVE,
-            validate(value) {
-                if (!Object.values(ACCOUNT_STATUS).includes(value)) {
-                    throw new Error('Invalid status');
-                }
-            }
+            enum: Object.values(ACCOUNT_STATUS)
         }
     },
     {

@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const uniqueString = require('unique-string');
-// const { TRANSACTION_TYPE, RELOAD, PAYMENT, TRANSFER } = require('../utils/constants/transaction');
+const { TRANSACTION_TYPE } = require('../utils/constants/transaction');
 
 const transactionSchema = new mongoose.Schema(
     {
@@ -21,7 +21,8 @@ const transactionSchema = new mongoose.Schema(
         },
         type: {
             type: String,
-            required: true
+            required: true,
+            enum: Object.values(TRANSACTION_TYPE)
         },
         typeDetail: {
             type: String,
