@@ -1,6 +1,5 @@
 const router = require('express').Router();
 const mongoose = require('mongoose');
-const uniqueString = require('unique-string');
 const auth = require('../middleware/auth');
 const checkAmount = require('../middleware/checkAmount');
 const checkBalance = require('../middleware/checkBalance');
@@ -33,6 +32,8 @@ router.post('/', auth, checkAmount, checkBalance, async (req, res) => {
 
         await sender.save();
         await receiver.save();
+
+        const uniqueString = require('unique-string');
 
         const transferFrom = await new Transaction({
             transactionId: uniqueString(),
