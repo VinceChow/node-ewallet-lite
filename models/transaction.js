@@ -1,11 +1,6 @@
 const mongoose = require('mongoose');
 const uniqueString = require('unique-string');
-const {
-    TRANSACTION_TYPE,
-    RELOAD,
-    PAYMENT,
-    TRANSFER
-} = require('../utils/constants/transaction');
+// const { TRANSACTION_TYPE, RELOAD, PAYMENT, TRANSFER } = require('../utils/constants/transaction');
 
 const transactionSchema = new mongoose.Schema(
     {
