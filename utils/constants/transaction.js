@@ -19,9 +19,15 @@ const TRANSFER = Object.freeze({
     P2P: 'P2P'
 });
 
+const DIRECTION = Object.freeze({
+    IN: 'in',
+    OUT: 'out'
+});
+
 module.exports = {
     TRANSACTION_TYPE,
     RELOAD,
     PAYMENT,
-    TRANSFER
+    TRANSFER,
+    DIRECTION
 };

@@ -31,6 +31,10 @@ const transactionSchema = new mongoose.Schema(
         },
         description: {
             type: String
+        },
+        direction: {
+            type: String,
+            required: true
         }
     },
     { timestamps: true }

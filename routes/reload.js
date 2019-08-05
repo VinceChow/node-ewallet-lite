@@ -3,7 +3,11 @@ const mongoose = require('mongoose');
 const Transaction = require('../models/transaction');
 const auth = require('../middleware/auth');
 const checkAmount = require('../middleware/checkAmount');
-const { TRANSACTION_TYPE, RELOAD } = require('../utils/constants/transaction');
+const {
+    TRANSACTION_TYPE,
+    RELOAD,
+    DIRECTION
+} = require('../utils/constants/transaction');
 
 const router = new express.Router();
 
@@ -28,6 +32,7 @@ router.post('/', auth, checkAmount, async (req, res) => {
             amount,
             type: TRANSACTION_TYPE.RELOAD,
             typeDetail: req.body.reloadMethod,
+            direction: DIRECTION.IN,
             description: req.body.reloadMethod
         }).save({ session });
 
