@@ -33,7 +33,7 @@ router.post('/', auth, async (req, res) => {
             user: user._id,
             amount,
             type: TRANSACTION_TYPE.RELOAD,
-            typeDetail: RELOAD.CC,
+            typeDetail: req.body.reloadMethod,
             description: req.body.reloadMethod
         }).save({ session });
 
