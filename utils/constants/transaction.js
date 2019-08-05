@@ -24,10 +24,17 @@ const DIRECTION = Object.freeze({
     OUT: 'out'
 });
 
+const TRANSACTION_LIMIT = Object.freeze({
+    DAILY: 1000,
+    MONTHLY: 10000,
+    ANNUAL: 50000
+});
+
 module.exports = {
     TRANSACTION_TYPE,
     RELOAD,
     PAYMENT,
     TRANSFER,
-    DIRECTION
+    DIRECTION,
+    TRANSACTION_LIMIT
 };

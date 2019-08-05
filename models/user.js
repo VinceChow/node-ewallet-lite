@@ -4,6 +4,29 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const { ACCOUNT_STATUS } = require('../utils/constants/user');
 const { GLOBAL_MAX } = require('../utils/constants/balance');
+const { TRANSACTION_LIMIT } = require('../utils/constants/transaction');
+
+const limitSchema = new mongoose.Schema(
+    {
+        limitType: {
+            type: String,
+            require: true,
+            unique: true,
+            enum: Object.keys(TRANSACTION_LIMIT)
+        },
+        key: {
+            type: String,
+            require: true
+        },
+        value: {
+            type: Number,
+            require: true,
+            min: 0,
+            default: 0
+        }
+    },
+    { timestamps: true }
+);
 
 const userSchema = new mongoose.Schema(
     {
@@ -52,7 +75,8 @@ const userSchema = new mongoose.Schema(
             required: true,
             default: ACCOUNT_STATUS.ACTIVE,
             enum: Object.values(ACCOUNT_STATUS)
-        }
+        },
+        limits: [limitSchema]
     },
     {
         timestamps: true
