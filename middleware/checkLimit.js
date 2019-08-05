@@ -15,16 +15,6 @@ const checkLimit = async (req, res, next) => {
     }
 
     next();
-
-    // UPDATE LIMIT
-    // Object.keys(TRANSACTION_LIMIT).forEach(key => {
-    //     const limit = {
-    //         limitType: key,
-    //         key: ,
-    //         value: 0
-    //     };
-    //     req.user.limits.push(limit);
-    // });
 };
 
 module.exports = checkLimit;
