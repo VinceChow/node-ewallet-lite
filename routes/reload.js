@@ -1,20 +1,13 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const validator = require('validator');
 const Transaction = require('../models/transaction');
 const auth = require('../middleware/auth');
+const checkAmount = require('../middleware/checkAmount');
 const { TRANSACTION_TYPE, RELOAD } = require('../utils/constants/transaction');
 
 const router = new express.Router();
 
-router.post('/', auth, async (req, res) => {
-    const amount = req.body.amount;
-    if (!amount) {
-        return res.status(400).send('Please specify reload amount!');
-    } else if (!validator.isCurrency(amount, { allow_negatives: false })) {
-        return res.status(400).send('Invalid amount!');
-    }
-
+router.post('/', auth, checkAmount, async (req, res) => {
     if (!Object.values(RELOAD).includes(req.body.reloadMethod)) {
         return res.status(400).send('Invalid reload method!');
     }
@@ -23,10 +16,11 @@ router.post('/', auth, async (req, res) => {
     session.startTransaction();
 
     try {
+        const amount = req.body.amount;
         const user = req.user;
-        user.$session(session);
 
-        user.balance += Number(amount);
+        user.$session(session);
+        user.balance += amount;
         await user.save();
 
         const transaction = await new Transaction({
