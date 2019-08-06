@@ -10,17 +10,17 @@ const limitSchema = new mongoose.Schema(
     {
         limitType: {
             type: String,
-            require: true,
+            required: true,
             unique: true,
             enum: Object.keys(TRANSACTION_LIMIT)
         },
         key: {
             type: String,
-            require: true
+            required: true
         },
         value: {
             type: Number,
-            require: true,
+            required: true,
             min: 0,
             default: 0
         }

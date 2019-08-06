@@ -25,9 +25,9 @@ const DIRECTION = Object.freeze({
 });
 
 const TRANSACTION_LIMIT = Object.freeze({
-    DAILY: 1000,
-    MONTHLY: 10000,
-    ANNUAL: 50000
+    DAILY: { NAME: 'DAILY', VALUE: 1000 },
+    MONTHLY: { NAME: 'MONTHLY', VALUE: 10000 },
+    ANNUAL: { NAME: 'ANNUAL', VALUE: 50000 }
 });
 
 module.exports = {
