@@ -52,7 +52,7 @@ router.post(
                 type: TRANSACTION_TYPE.PAYMENT,
                 typeDetail: req.body.paymentType,
                 direction: DIRECTION.OUT,
-                description: req.body.paymentType,
+                description: req.body.orderDetail,
                 mid: merchant.mid
             }).save({ session });
 
