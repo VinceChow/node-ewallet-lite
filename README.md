@@ -1,5 +1,5 @@
 # Welcome to eWallet Lite!
-This is the mini version of an eWallet backend system built by [Vincent Chow](https://github.com/vincent0813) using his newly acquired skillsets, **Node.js** and [Express](https://expressjs.com/). 
+This is the mini version of an eWallet backend system built by [Vincent Chow](https://github.com/vincent0813) within 3 days using his newly acquired skillsets, **Node.js** and [Express](https://expressjs.com/). 
 
 
 # Endpoints
@@ -34,6 +34,7 @@ Transaction
  - Implement **promotion, rewards & loyalty** related features.
  - Allow user to upload **profile picture**.
  - Enhance **error logging**.
+ - Write **unit test** cases to cover all functionalities using [Jest](https://jestjs.io/).
 
 # Playground
 You can play around with the mini eWallet system by importing the following files to your [Postman](https://www.getpostman.com/) application.
