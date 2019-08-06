@@ -50,21 +50,13 @@ const merchantSchema = new mongoose.Schema(
             type: String,
             required: true,
             default: SETTLEMENT.T_PLUS_1,
-            validate(value) {
-                if (!Object.values(SETTLEMENT).includes(value)) {
-                    throw new Error('Invalid settlement period');
-                }
-            }
+            enum: Object.values(SETTLEMENT)
         },
         status: {
             type: String,
             required: true,
             default: MERCHANT_STATUS.ACTIVE,
-            validate(value) {
-                if (!Object.values(MERCHANT_STATUS).includes(value)) {
-                    throw new Error('Invalid merchant status');
-                }
-            }
+            enum: Object.values(MERCHANT_STATUS)
         }
     },
     { timestamps: true }
