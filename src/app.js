@@ -20,6 +20,11 @@ app.use('/api/transactions', transactionRoute);
 app.use('/api/transfer', transferRoute);
 app.use('/api/payment', paymentRoute);
 
-app.get('/', (req, res) => res.send('eWallet Lite is up and running...'));
+app.get('/', (req, res) =>
+    res.send({
+        status: 'eWallet Lite is up and running.',
+        info: 'http://bit.ly/ewallet-lite-repo'
+    })
+);
 
 module.exports = app;
