@@ -1,5 +1,5 @@
 # Welcome to eWallet Lite!
-This is the mini version of an eWallet backend system built by [Vincent Chow](https://github.com/vincent0813) within 3 days using his newly acquired skillsets, **Node.js** and [Express](https://expressjs.com/). 
+This is the mini version of an eWallet backend system built by [Vincent Chow](https://github.com/vincent0813) within 3 days using his newly acquired skillsets, **Node.js**, [Express](https://expressjs.com/), and [Mongoose](https://mongoosejs.com/). 
 
 
 # Endpoints
