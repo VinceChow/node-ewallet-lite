@@ -8,8 +8,7 @@ const merchantSchema = new mongoose.Schema(
             type: String,
             required: true,
             unique: true,
-            immutable: true,
-            default: uniqueString()
+            immutable: true
         },
         name: {
             type: String,
@@ -35,6 +34,7 @@ const merchantSchema = new mongoose.Schema(
         },
         internalAccountBalance: {
             type: Number,
+            required: true,
             min: 0,
             default: 0
         },
@@ -69,6 +69,14 @@ const merchantSchema = new mongoose.Schema(
     },
     { timestamps: true }
 );
+
+merchantSchema.pre('save', async function(next) {
+    const merchant = this;
+    if (merchant.isNew) {
+        merchant.mid = uniqueString();
+    }
+    next();
+});
 
 const Merchant = mongoose.model('Merchant', merchantSchema);
 
