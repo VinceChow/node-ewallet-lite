@@ -35,6 +35,7 @@ Transaction
  - Allow user to upload **profile picture**.
  - Enhance **error logging**.
  - Write **unit test** cases to cover all functionalities using [Jest](https://jestjs.io/).
+ - Improve code structure using **SOLID principle**.
 
 # Playground
 You can play around with the mini eWallet system by importing the following files to your [Postman](https://www.getpostman.com/) application.
