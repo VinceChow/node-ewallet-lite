@@ -34,6 +34,7 @@ Transaction
  - Implement **promotion, rewards & loyalty** related features.
  - Allow user to upload **profile picture**.
  - Enhance **error logging**.
+ - Write **unit test** cases to cover all functionalities using [Jest](https://jestjs.io/).
 
 # Playground
 You can play around with the mini eWallet system by importing the following files to your [Postman](https://www.getpostman.com/) application.
