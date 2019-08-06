@@ -6,7 +6,6 @@ const merchantSchema = new mongoose.Schema(
     {
         mid: {
             type: String,
-            required: true,
             unique: true,
             immutable: true
         },
@@ -62,7 +61,7 @@ const merchantSchema = new mongoose.Schema(
     { timestamps: true }
 );
 
-merchantSchema.pre('save', async function(next) {
+merchantSchema.pre('save', function(next) {
     const merchant = this;
     if (merchant.isNew) {
         merchant.mid = uniqueString();
