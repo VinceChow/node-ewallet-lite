@@ -5,6 +5,7 @@ const checkAmount = require('../middleware/checkAmount');
 const checkBalance = require('../middleware/checkBalance');
 const checkLimit = require('../middleware/checkLimit');
 const Transaction = require('../models/transaction');
+const Merchant = require('../models/merchant');
 const {
     TRANSACTION_TYPE,
     PAYMENT,
@@ -20,6 +21,11 @@ router.post(
     checkBalance,
     checkLimit,
     async (req, res) => {
+        const merchant = await validateMid(req.body.mid);
+        if (!merchant) {
+            return res.status(404).send('Merchant not found!');
+        }
+
         if (!Object.values(PAYMENT).includes(req.body.paymentType)) {
             return res.status(400).send('Invalid payment type!');
         }
@@ -36,13 +42,18 @@ router.post(
             user.limits = updateLimit(req.user.limits, amount);
             await user.save();
 
+            merchant.$session(session);
+            merchant.internalAccountBalance += amount;
+            await merchant.save();
+
             const transaction = await new Transaction({
                 user: user._id,
                 amount,
                 type: TRANSACTION_TYPE.PAYMENT,
                 typeDetail: req.body.paymentType,
                 direction: DIRECTION.OUT,
-                description: req.body.paymentType
+                description: req.body.paymentType,
+                mid: merchant.mid
             }).save({ session });
 
             await session.commitTransaction();
@@ -56,6 +67,13 @@ router.post(
         }
     }
 );
+
+async function validateMid(mid) {
+    if (!mid) {
+        return undefined;
+    }
+    return await Merchant.findOne({ mid });
+}
 
 function updateLimit(userLimits, amount) {
     if (userLimits.length !== 0) {
