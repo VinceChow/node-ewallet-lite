@@ -29,6 +29,7 @@ Transaction
 
 # Future Enhancements
  - **Verify user phone number** before registration (Integrate with [Twilio](https://www.twilio.com/) by sending SMS verification to user phone number).
+ - Implement **idempotent check** for all transactions.
  - Implement **refund** feature.
  - Implement **settlement** feature for merchant to release funds to merchant based on settlement period.
  - Implement **promotion, rewards & loyalty** related features.
@@ -36,6 +37,7 @@ Transaction
  - Enhance **error logging**.
  - Write **unit test** cases to cover all functionalities using [Jest](https://jestjs.io/).
  - Improve code structure using **SOLID principle**.
+ - Write **JSDoc**.
 
 # Playground
 You can play around with the mini eWallet system by importing the following files to your [Postman](https://www.getpostman.com/) application.
