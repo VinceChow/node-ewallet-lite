@@ -19,7 +19,7 @@
     "mongoose": "^5.6.8",
     "outdated": "^0.1.1",
     "unique-string": "^2.0.0",
-    "validator": "^11.1.0"
+    "validator": "^13.7.0"
   },
   "devDependencies": {
     "env-cmd": "^9.0.3",
